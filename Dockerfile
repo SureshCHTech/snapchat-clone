@@ -14,19 +14,19 @@ RUN npm install
 COPY . .
 
 # Build the React app
-RUN npm run build
+# RUN npm run build
 
 # Use the same Node.js 14 image for the production environment
 FROM node:14
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /build
 
 # Copy the build output from the previous stage
-COPY --from=build /app/build ./build
+COPY --from=build /app /build
 
 # Expose port 3000 to the outside world
 EXPOSE 3008
 
 # Command to run the React app
-CMD ["npm", "run", "start"]
+CMD ["npm", "start"]
